@@ -79,6 +79,11 @@ struct ContentView: View {
                 }
             }
         }
+        .onChange(of: selectedUnits) { newValue in
+            let units = unitTypes[newValue]
+            inputUnit = units[0]
+            outputUnit = units[1]
+        }
     }
     
     var result: String {
