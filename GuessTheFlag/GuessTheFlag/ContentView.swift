@@ -34,7 +34,7 @@ struct ContentView: View {
             VStack {
                 Spacer()
                 Text("Guess the Flag")
-                    .font(.largeTitle.weight(.bold))
+                    .font(.custom("Aero Matics Regular", size: 24))
                     .foregroundColor(.white)
                 Spacer()
                 Spacer()
@@ -43,7 +43,7 @@ struct ContentView: View {
                     .font(.title.bold())
                 Text("Current Round: \(currentRound)")
                     .foregroundColor(.white)
-                    .font(.subheadline.smallCaps())
+                    .font(.custom("Aero Matics Display Bold", size: 18))
                 Spacer()
                 VStack(spacing: 15) {
                     VStack{

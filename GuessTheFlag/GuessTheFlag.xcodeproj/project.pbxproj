@@ -14,6 +14,8 @@
 		03D6B6872972EBA600F7A288 /* GuessTheFlagTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D6B6862972EBA600F7A288 /* GuessTheFlagTests.swift */; };
 		03D6B6912972EBA600F7A288 /* GuessTheFlagUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D6B6902972EBA600F7A288 /* GuessTheFlagUITests.swift */; };
 		03D6B6932972EBA600F7A288 /* GuessTheFlagUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D6B6922972EBA600F7A288 /* GuessTheFlagUITestsLaunchTests.swift */; };
+		03D6B6A429730BFA00F7A288 /* Aero Matics Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03D6B6A229730BFA00F7A288 /* Aero Matics Regular.ttf */; };
+		03D6B6A529730BFA00F7A288 /* Aero Matics Display Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03D6B6A329730BFA00F7A288 /* Aero Matics Display Bold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,9 @@
 		03D6B68C2972EBA600F7A288 /* GuessTheFlagUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GuessTheFlagUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		03D6B6902972EBA600F7A288 /* GuessTheFlagUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuessTheFlagUITests.swift; sourceTree = "<group>"; };
 		03D6B6922972EBA600F7A288 /* GuessTheFlagUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuessTheFlagUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		03D6B69F29730AC600F7A288 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		03D6B6A229730BFA00F7A288 /* Aero Matics Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Aero Matics Regular.ttf"; sourceTree = "<group>"; };
+		03D6B6A329730BFA00F7A288 /* Aero Matics Display Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Aero Matics Display Bold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,8 +99,10 @@
 		03D6B6742972EBA400F7A288 /* GuessTheFlag */ = {
 			isa = PBXGroup;
 			children = (
+				03D6B69F29730AC600F7A288 /* Info.plist */,
 				03D6B6752972EBA400F7A288 /* GuessTheFlagApp.swift */,
 				03D6B6772972EBA400F7A288 /* ContentView.swift */,
+				03D6B6A029730BFA00F7A288 /* Fonts */,
 				03D6B6792972EBA600F7A288 /* Assets.xcassets */,
 				03D6B67B2972EBA600F7A288 /* Preview Content */,
 			);
@@ -125,6 +132,23 @@
 				03D6B6922972EBA600F7A288 /* GuessTheFlagUITestsLaunchTests.swift */,
 			);
 			path = GuessTheFlagUITests;
+			sourceTree = "<group>";
+		};
+		03D6B6A029730BFA00F7A288 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				03D6B6A129730BFA00F7A288 /* aero_matics */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		03D6B6A129730BFA00F7A288 /* aero_matics */ = {
+			isa = PBXGroup;
+			children = (
+				03D6B6A229730BFA00F7A288 /* Aero Matics Regular.ttf */,
+				03D6B6A329730BFA00F7A288 /* Aero Matics Display Bold.ttf */,
+			);
+			path = aero_matics;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,8 +255,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03D6B6A429730BFA00F7A288 /* Aero Matics Regular.ttf in Resources */,
 				03D6B67D2972EBA600F7A288 /* Preview Assets.xcassets in Resources */,
 				03D6B67A2972EBA600F7A288 /* Assets.xcassets in Resources */,
+				03D6B6A529730BFA00F7A288 /* Aero Matics Display Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,6 +446,7 @@
 				DEVELOPMENT_TEAM = 5QZXV9E6SU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GuessTheFlag/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -449,6 +476,7 @@
 				DEVELOPMENT_TEAM = 5QZXV9E6SU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GuessTheFlag/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
