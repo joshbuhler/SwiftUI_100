@@ -47,8 +47,8 @@ struct ContentView: View {
                 VStack(spacing: 15) {
                     VStack{
                         Text("Tap the flag of…")
-                            .foregroundStyle(.secondary)
-                            .font(.subheadline.weight(.heavy))
+                            .foregroundStyle(.ultraThinMaterial)
+                            .smallCaps()
                         
                         Text(countries[correctAnswer])
                             .font(.largeTitle.weight(.semibold))
@@ -58,10 +58,11 @@ struct ContentView: View {
                         Button {
                             flagTapped(number)
                         } label: {
-                            Image(countries[number])
-                                .renderingMode(.original)
-                                .clipShape(Capsule())
-                                .shadow(radius: 5)
+//                            Image(countries[number])
+//                                .renderingMode(.original)
+//                                .clipShape(Capsule())
+//                                .shadow(radius: 5)
+                            FlagImage(flagString: countries[number])
                         }
                     }
                 }
@@ -112,6 +113,16 @@ struct ContentView: View {
     }
 }
 
+struct FlagImage: View {
+    var flagString:String
+    var body: some View {
+        Image(flagString)
+            .renderingMode(.original)
+            .clipShape(Capsule())
+            .shadow(radius: 5)
+    }
+}
+
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
@@ -123,8 +134,13 @@ struct SmallCaps: ViewModifier {
         content
             .font(.custom("Aero Matics Display Bold", size: 18))
             .foregroundColor(.black)
-            .padding()
 //            .background(.blue)
 //            .clipShape(RoundedRectangle(cornerRadius: 10))
+    }
+}
+
+extension View {
+    func smallCaps() -> some View {
+        modifier(SmallCaps())
     }
 }
