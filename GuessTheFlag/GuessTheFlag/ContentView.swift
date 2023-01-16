@@ -42,8 +42,7 @@ struct ContentView: View {
                     .foregroundColor(.white)
                     .font(.title.bold())
                 Text("Current Round: \(currentRound)")
-                    .foregroundColor(.white)
-                    .font(.custom("Aero Matics Display Bold", size: 18))
+                    .modifier(SmallCaps())
                 Spacer()
                 VStack(spacing: 15) {
                     VStack{
@@ -116,5 +115,16 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+    }
+}
+
+struct SmallCaps: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.custom("Aero Matics Display Bold", size: 18))
+            .foregroundColor(.black)
+            .padding()
+//            .background(.blue)
+//            .clipShape(RoundedRectangle(cornerRadius: 10))
     }
 }
