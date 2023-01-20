@@ -26,6 +26,10 @@ struct LandmarkRow: View {
 struct LandmarkRow_Previews: PreviewProvider {
     static var previews: some View {
         // `landmarks` is a global defined in ModelData.swift
-        LandmarkRow(landmark: landmarks[0])
+        Group{
+            LandmarkRow(landmark: landmarks[0])
+            LandmarkRow(landmark: landmarks[1])
+        }
+        .previewLayout(.fixed(width: 300, height: 70))
     }
 }
