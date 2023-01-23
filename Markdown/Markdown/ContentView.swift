@@ -6,24 +6,36 @@
 //
 
 import SwiftUI
+import MarkdownUI
 
 struct ContentView: View {
     var body: some View {
-        ScrollView{
-            VStack {
-                Text("Regular")
-                Text("*Italics*")
-                Text("**Bold**")
-                Text("~Strikethrough~")
-                Text("`Code`")
-                Text("[Link](https://apple.com)")
-                Text("***[They](https://apple.com) ~are~ `combinable`***")
+        TabView {
+            ScrollView{
+                VStack {
+                    Text("Regular")
+                    Text("*Italics*")
+                    Text("**Bold**")
+                    Text("~Strikethrough~")
+                    Text("`Code`")
+                    Text("[Link](https://apple.com)")
+                    Text("***[They](https://apple.com) ~are~ `combinable`***")
+                }
+                VStack {
+                    Image(systemName: "globe")
+                        .imageScale(.large)
+                        .foregroundColor(.accentColor)
+                    Text(LocalizedStringKey(testFile))
+                }
+            }.tabItem {
+                Text ("Native")
             }
-            VStack {
-                Image(systemName: "globe")
-                    .imageScale(.large)
-                    .foregroundColor(.accentColor)
-                Text(testFile)
+            
+            ScrollView {
+//                Markdown("*Italics*")
+                Markdown(testFile)
+            }.tabItem {
+                Text ("SwiftMarkdownUI")
             }
         }
         .padding()
@@ -36,7 +48,7 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
-let testFile:LocalizedStringKey = """
+let testFile = """
 # Markdown: Syntax
 
 *   [Overview](#overview)
