@@ -11,34 +11,41 @@ import MarkdownUI
 struct ContentView: View {
     var body: some View {
         TabView {
-            ScrollView{
-                VStack {
-                    Text("Regular")
-                    Text("*Italics*")
-                    Text("**Bold**")
-                    Text("~Strikethrough~")
-                    Text("`Code`")
-                    Text("[Link](https://apple.com)")
-                    Text("***[They](https://apple.com) ~are~ `combinable`***")
+            Group {
+                ScrollView {
+                    VStack {
+                        Text ("Using the built-in Markdown rendering, SwiftUI only supports inline events such as:")
+                        
+                        Text("Regular")
+                        Text("*Italics*")
+                        Text("**Bold**")
+                        Text("~Strikethrough~")
+                        Text("`Code`")
+                        Text("[Link](https://apple.com)")
+                        Text("***[They](https://apple.com) ~are~ `combinable`***")
+                        
+                        Divider()
+                        
+                        Text(LocalizedStringKey(testFile))
+                    }
+                }.tabItem {
+                    Label("Built-In", systemImage: "text.redaction")
                 }
-                VStack {
-                    Image(systemName: "globe")
-                        .imageScale(.large)
-                        .foregroundColor(.accentColor)
-                    Text(LocalizedStringKey(testFile))
+                
+                ScrollView {
+                    VStack {
+                        Text ("MarkdownUI provides much more robust support, not just for inline, but also block elements.")
+                        
+                        Divider()
+                        
+                        Markdown(testFile)
+                    }
+                }.tabItem {
+                    Label("MarkdownUI", systemImage: "list.bullet")
                 }
-            }.tabItem {
-                Text ("Native")
             }
-            
-            ScrollView {
-//                Markdown("*Italics*")
-                Markdown(testFile)
-            }.tabItem {
-                Text ("SwiftMarkdownUI")
-            }
+            .padding()
         }
-        .padding()
     }
 }
 
