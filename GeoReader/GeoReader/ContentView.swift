@@ -48,34 +48,55 @@ struct CardGroup:View {
         //        .background(.green)
         
         //    }
-//        VStack {
-//            UnitDeployment()
-            UnitDeployment()
-            .frame(height: 100)
-//        }
+        //        VStack {
+        //            UnitDeployment()
+        UnitDeployment()
+            .frame(height: 200)
+        //        }
     }
 }
 
 struct UnitDeployment:View {
     var body: some View {
-        VStack{
-            HStack{
+//        GeometryReader() { geo in
+//            VStack{
+//                HStack{
+//                    UnitCard()
+//                        .frame(width: geo.size.width * 0.67)
+//                    UpgradeCard()
+//                        .frame(width: geo.size.width * 0.33)
+//                    //                        .fixedSize(horizontal: false, vertical: true)
+//                    //                    .rotationEffect(Angle(degrees: 90))
+//                }
+//
+//                .border(Color.gray)
+//                HStack{
+//                    UpgradeCard()
+//                        .frame(width: geo.size.width * 0.33)
+//                    UpgradeCard()
+//                        .frame(width: geo.size.width * 0.33)
+//                    UpgradeCard()
+//                        .frame(width: geo.size.width * 0.33)
+//                }
+//            }
+//        }
+//        .frame(width: 200)
+//        .border(Color.green)
+        
+        VStack {
+            HStack {
                 UnitCard()
-                    .fixedSize(horizontal: false, vertical: true)
                 UpgradeCard()
-                    .fixedSize(horizontal: false, vertical: true)
             }
-            .border(Color.gray)
-            HStack{
+            .border(.blue)
+            HStack {
                 UpgradeCard()
-                    .fixedSize()
                 UpgradeCard()
-                    .fixedSize()
                 UpgradeCard()
-                    .fixedSize()
             }
+            .border(.red)
         }
-        .border(Color.green)
+        .border(.green)
     }
 }
 
@@ -84,7 +105,7 @@ struct UnitCard:View {
         Color.orange
             .opacity(0.5)
             .aspectRatio(88/61, contentMode: .fit)
-            .frame(idealHeight: 200)
+        //            .frame(idealHeight: 200)
             .background(.gray)
     }
 }
@@ -94,7 +115,7 @@ struct UpgradeCard:View {
         Color.blue
             .opacity(0.25)
             .aspectRatio(61/88, contentMode: .fit)
-            .frame(idealHeight: 200)
+        //            .frame(idealHeight: 200)
             .background(.gray)
     }
 }
