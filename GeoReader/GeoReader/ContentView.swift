@@ -51,7 +51,17 @@ struct CardGroup:View {
         //        VStack {
         //            UnitDeployment()
         UnitDeployment()
-            .frame(height: 200)
+            .fixedSize(horizontal: true, vertical: false)
+            .frame(width: 300, height: 300)
+//        TabView {
+//            UnitDeployment()
+//            UnitDeployment()
+//            UnitDeployment()
+//            UnitDeployment()
+//        }
+//        .tabViewStyle(.page(indexDisplayMode: .always))
+//        .indexViewStyle(.page(backgroundDisplayMode: .always))
+//        .frame(height: 200)
         //        }
     }
 }
@@ -83,13 +93,13 @@ struct UnitDeployment:View {
 //        .frame(width: 200)
 //        .border(Color.green)
         
-        VStack {
+        VStack (alignment:.leading) {
             HStack {
                 UnitCard()
                 UpgradeCard()
             }
             .border(.blue)
-            HStack {
+            HStack{
                 UpgradeCard()
                 UpgradeCard()
                 UpgradeCard()
