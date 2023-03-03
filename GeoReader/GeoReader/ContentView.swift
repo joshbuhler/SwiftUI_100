@@ -9,102 +9,71 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        //        GeometryReader { geeometry in
-        //            HStack(spacing: 0) {
-        //                Text ("Left")
-        //                    .font(.largeTitle)
-        //                    .foregroundColor(.black)
-        //                    .aspectRatio(88/61, contentMode: .fill)
-        //                    .frame(width: geeometry.size.width * 0.33, height: geeometry.size.height)
-        //                    .background(.yellow)
-        //                Text ("Right")
-        //                    .font(.largeTitle)
-        //                    .foregroundColor(.black)
-        //                    .frame(width: geeometry.size.width * 0.67)
-        //                    .background(.orange)
-        //            }
-        //        }
         CardGroup()
     }
 }
 
 struct CardGroup:View {
     var body: some View {
-        //        GeometryReader { geo in
-        //        HStack () {
-        //                Color.orange
-        //                .frame(idealHeight: 100)
-        ////                    .aspectRatio(88/61, contentMode: .fit)
-        ////                                .frame(maxHeight: .infinity)
-        //                Spacer()
-        //                Color.blue
-        ////                    .aspectRatio(61/88, contentMode: .fit)
-        ////                    .frame(maxHeight: geo.size.height)
-        //            }
-        //            .background(.gray)
-        //        }
-        ////        .frame(height: 200)
-        ////        .fixedSize(horizontal: false, vertical: true)
-        //        .background(.green)
         
-        //    }
-        //        VStack {
-        //            UnitDeployment()
         UnitDeployment()
-            .fixedSize(horizontal: true, vertical: false)
+        //                    .fixedSize(horizontal: true, vertical: false)
             .frame(width: 300, height: 300)
-//        TabView {
-//            UnitDeployment()
-//            UnitDeployment()
-//            UnitDeployment()
-//            UnitDeployment()
-//        }
-//        .tabViewStyle(.page(indexDisplayMode: .always))
-//        .indexViewStyle(.page(backgroundDisplayMode: .always))
-//        .frame(height: 200)
-        //        }
     }
+        //        TabView {
+        //            UnitDeployment()
+        //            UnitDeployment()
+        //            UnitDeployment()
+        //            UnitDeployment()
+        //        }
+        //        .tabViewStyle(.page(indexDisplayMode: .always))
+        //        .indexViewStyle(.page(backgroundDisplayMode: .always))
+        //        .frame(height: 200)
+        //        }
 }
 
 struct UnitDeployment:View {
     var body: some View {
-//        GeometryReader() { geo in
-//            VStack{
-//                HStack{
-//                    UnitCard()
-//                        .frame(width: geo.size.width * 0.67)
-//                    UpgradeCard()
-//                        .frame(width: geo.size.width * 0.33)
-//                    //                        .fixedSize(horizontal: false, vertical: true)
-//                    //                    .rotationEffect(Angle(degrees: 90))
-//                }
-//
-//                .border(Color.gray)
-//                HStack{
-//                    UpgradeCard()
-//                        .frame(width: geo.size.width * 0.33)
-//                    UpgradeCard()
-//                        .frame(width: geo.size.width * 0.33)
-//                    UpgradeCard()
-//                        .frame(width: geo.size.width * 0.33)
-//                }
-//            }
-//        }
-//        .frame(width: 200)
-//        .border(Color.green)
+        //        GeometryReader() { geo in
+        //            VStack{
+        //                HStack{
+        //                    UnitCard()
+        //                        .frame(width: geo.size.width * 0.67)
+        //                    UpgradeCard()
+        //                        .frame(width: geo.size.width * 0.33)
+        //                    //                        .fixedSize(horizontal: false, vertical: true)
+        //                    //                    .rotationEffect(Angle(degrees: 90))
+        //                }
+        //
+        //                .border(Color.gray)
+        //                HStack{
+        //                    UpgradeCard()
+        //                        .frame(width: geo.size.width * 0.33)
+        //                    UpgradeCard()
+        //                        .frame(width: geo.size.width * 0.33)
+        //                    UpgradeCard()
+        //                        .frame(width: geo.size.width * 0.33)
+        //                }
+        //            }
+        //        }
+        //        .frame(width: 200)
+        //        .border(Color.green)
         
-        VStack (alignment:.leading) {
-            HStack {
-                UnitCard()
-                UpgradeCard()
+        VStack () {
+            GeometryReader { geo in
+                HStack {
+                    UnitCard()
+                    UpgradeCard()
+                }
+                .frame(height: geo.size.height * 0.5)
+                .border(.blue)
+                HStack{
+                    UpgradeCard()
+                    UpgradeCard()
+                    UpgradeCard()
+                }
+                .border(.red)
             }
-            .border(.blue)
-            HStack{
-                UpgradeCard()
-                UpgradeCard()
-                UpgradeCard()
-            }
-            .border(.red)
         }
         .border(.green)
     }
