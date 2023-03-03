@@ -18,7 +18,8 @@ struct CardGroup:View {
         
         UnitDeployment()
         //                    .fixedSize(horizontal: true, vertical: false)
-            .frame(width: 300, height: 300)
+            .frame(width: 325, height: 250)
+            .border(.orange)
     }
         //        TabView {
         //            UnitDeployment()
@@ -32,48 +33,72 @@ struct CardGroup:View {
         //        }
 }
 
+extension View {
+    func addVerifiedBadge (_ isVerified:Bool) -> some View {
+        ZStack(alignment: .topTrailing) {
+            self
+            
+            if (isVerified) {
+                Image(systemName: "checkmark.circle.fill")
+                    .offset(x: 3, y: -3)
+            }
+        }
+    }
+    
+    func syncingHeightIfLarger(than height:Binding<CGFloat?>) -> some View {
+        background(GeometryReader { proxy in
+            Color.clear.preference(key: HeightPreferenceKey.self,
+                                   value: proxy.size.height)
+        })
+        .onPreferenceChange(HeightPreferenceKey.self) {
+            height.wrappedValue = max(height.wrappedValue ?? 0, $0)
+        }
+    }
+}
+
+private struct HeightPreferenceKey:PreferenceKey {
+    static let defaultValue: CGFloat = 0
+    
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = nextValue()
+    }
+}
+
+struct HeightSyncedRow<Background:View, Content:View>:View {
+    private let background:Background
+    private let content:Content
+    @State private var childHeight:CGFloat?
+    
+    init(background:Background, @ViewBuilder content: () -> Content) {
+        self.background = background
+        self.content = content()
+    }
+    
+    var body: some View {
+        HStack {
+            content.syncingHeightIfLarger(than: $childHeight)
+                .frame(height:childHeight)
+                .background(background)
+//                .border(.red)
+        }
+    }
+}
+
 struct UnitDeployment:View {
     var body: some View {
-        //        GeometryReader() { geo in
-        //            VStack{
-        //                HStack{
-        //                    UnitCard()
-        //                        .frame(width: geo.size.width * 0.67)
-        //                    UpgradeCard()
-        //                        .frame(width: geo.size.width * 0.33)
-        //                    //                        .fixedSize(horizontal: false, vertical: true)
-        //                    //                    .rotationEffect(Angle(degrees: 90))
-        //                }
-        //
-        //                .border(Color.gray)
-        //                HStack{
-        //                    UpgradeCard()
-        //                        .frame(width: geo.size.width * 0.33)
-        //                    UpgradeCard()
-        //                        .frame(width: geo.size.width * 0.33)
-        //                    UpgradeCard()
-        //                        .frame(width: geo.size.width * 0.33)
-        //                }
-        //            }
-        //        }
-        //        .frame(width: 200)
-        //        .border(Color.green)
         
         VStack () {
-            GeometryReader { geo in
-                HStack {
-                    UnitCard()
-                    UpgradeCard()
-                }
-                .frame(height: geo.size.height * 0.5)
-                .border(.blue)
-                HStack{
-                    UpgradeCard()
-                    UpgradeCard()
-                    UpgradeCard()
-                }
-                .border(.red)
+            HeightSyncedRow(background: Color.red) {
+                UnitCard().layoutPriority(1)
+                UpgradeCard()
             }
+            .border(.blue)
+            HeightSyncedRow(background: Color.red){
+                UpgradeCard()
+                UpgradeCard()
+                UpgradeCard()
+            }
+            .border(.red)
         }
         .border(.green)
     }
@@ -84,6 +109,7 @@ struct UnitCard:View {
         Color.orange
             .opacity(0.5)
             .aspectRatio(88/61, contentMode: .fit)
+//            .frame(maxWidth: .infinity)
         //            .frame(idealHeight: 200)
             .background(.gray)
     }
@@ -94,8 +120,9 @@ struct UpgradeCard:View {
         Color.blue
             .opacity(0.25)
             .aspectRatio(61/88, contentMode: .fit)
+            .frame(maxHeight: .infinity)
         //            .frame(idealHeight: 200)
-            .background(.gray)
+//            .background(.gray)
     }
 }
 

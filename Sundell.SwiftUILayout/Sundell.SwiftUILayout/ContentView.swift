@@ -11,10 +11,20 @@ struct ContentView: View {
     var body: some View {
         VStack {
             EventHeader()
+            ImagePlaceholder().layoutPriority(-1)
+                .frame(minHeight: 100)
+            Text(makeDescription())
             Spacer()
             EventInfoList()
+                .fixedSize(horizontal: false, vertical: true)
         }
         .padding()
+    }
+}
+
+private extension ContentView {
+    func makeDescription() -> String {
+        String(repeating: "This is a description ", count: 50)
     }
 }
 
@@ -25,10 +35,20 @@ extension View {
             
             if (isVerified) {
                 Image(systemName: "checkmark.circle.fill")
-                    .offset(x: 3, y: -3)
+                    .alignAsBadge()
             }
         }
     }
+    
+    func alignAsBadge(withRatio ratio: CGFloat = 0.8,
+                          alignment: Alignment = .topTrailing) -> some View {
+            alignmentGuide(alignment.horizontal) {
+                $0.width * ratio
+            }
+            .alignmentGuide(alignment.vertical) {
+                $0[.bottom] - $0.height * ratio
+            }
+        }
     
     func syncingHeightIfLarger(than height:Binding<CGFloat?>) -> some View {
         background(GeometryReader { proxy in
@@ -37,6 +57,15 @@ extension View {
         })
         .onPreferenceChange(HeightPreferenceKey.self) {
             height.wrappedValue = max(height.wrappedValue ?? 0, $0)
+        }
+    }
+}
+
+struct ImagePlaceholder:View {
+    var body: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 10).stroke()
+            Text("Image placeholder")
         }
     }
 }
