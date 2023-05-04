@@ -11,26 +11,35 @@ struct ContentView: View {
     
     @State private var sleepAmount = 8.0
     @State private var wakeUp = Date.now
+    @State private var coffeeAmount = 1
     
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
-            
-            Stepper("\(sleepAmount.formatted()) hours",
-                    value: $sleepAmount,
-                    in: 4...12,
-                    step: 0.25)
-            
-            DatePicker("Please enter a date",
-                       selection: $wakeUp,
-                       in: Date.now...,
-                       displayedComponents: .hourAndMinute)
-            .labelsHidden()
+        NavigationView {
+            VStack {
+                Text("When do you want to wake up?")
+                    .font(.headline)
+                
+                Stepper("\(sleepAmount.formatted())", value: $sleepAmount)
+                
+                DatePicker("Please enter a time",
+                           selection: $wakeUp,
+                           in: Date.now...,
+                           displayedComponents: .hourAndMinute)
+                .labelsHidden()
+                
+                Text("Daily coffee intake")
+                    .font(.headline)
+                Stepper(coffeeAmount == 1 ? "1 Cup" : "\(coffeeAmount) Cups", value: $coffeeAmount)
+            }
         }
-        .padding()
+        .navigationTitle("BetterRest")
+        .toolbar {
+            Button("Calculate", action: calculateBedtime)
+        }
+    }
+    
+    func calculateBedtime() {
+        
     }
 }
 
