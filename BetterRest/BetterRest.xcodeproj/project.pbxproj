@@ -14,7 +14,7 @@
 		03819DDC29FD4524002B13D6 /* BetterRestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03819DDB29FD4524002B13D6 /* BetterRestTests.swift */; };
 		03819DE629FD4524002B13D6 /* BetterRestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03819DE529FD4524002B13D6 /* BetterRestUITests.swift */; };
 		03819DE829FD4524002B13D6 /* BetterRestUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03819DE729FD4524002B13D6 /* BetterRestUITestsLaunchTests.swift */; };
-		03819DF52A0428EF002B13D6 /* BetterRest.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 03819DF42A0428EF002B13D6 /* BetterRest.mlmodel */; };
+		03819DF52A0428EF002B13D6 /* SleepCalculator.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 03819DF42A0428EF002B13D6 /* SleepCalculator.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,7 +45,7 @@
 		03819DE129FD4524002B13D6 /* BetterRestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BetterRestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		03819DE529FD4524002B13D6 /* BetterRestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetterRestUITests.swift; sourceTree = "<group>"; };
 		03819DE729FD4524002B13D6 /* BetterRestUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetterRestUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		03819DF42A0428EF002B13D6 /* BetterRest.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = BetterRest.mlmodel; sourceTree = "<group>"; };
+		03819DF42A0428EF002B13D6 /* SleepCalculator.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SleepCalculator.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,7 +96,7 @@
 		03819DC929FD4523002B13D6 /* BetterRest */ = {
 			isa = PBXGroup;
 			children = (
-				03819DF42A0428EF002B13D6 /* BetterRest.mlmodel */,
+				03819DF42A0428EF002B13D6 /* SleepCalculator.mlmodel */,
 				03819DCA29FD4523002B13D6 /* BetterRestApp.swift */,
 				03819DCC29FD4523002B13D6 /* ContentView.swift */,
 				03819DCE29FD4524002B13D6 /* Assets.xcassets */,
@@ -261,7 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				03819DCD29FD4523002B13D6 /* ContentView.swift in Sources */,
-				03819DF52A0428EF002B13D6 /* BetterRest.mlmodel in Sources */,
+				03819DF52A0428EF002B13D6 /* SleepCalculator.mlmodel in Sources */,
 				03819DCB29FD4523002B13D6 /* BetterRestApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
