@@ -11,31 +11,38 @@ import CoreML
 struct ContentView: View {
     
     @State private var sleepAmount = 8.0
-    @State private var wakeUp = Date.now
+    @State private var wakeUp = defaultWakeTime
     @State private var coffeeAmount = 1
     
     @State private var alertTitle = ""
     @State private var alertMessage = ""
     @State private var showingAlert = false
-    
+        
     var body: some View {
         NavigationView {
-            VStack {
+            Form {
                 Text("When do you want to wake up?")
                     .font(.headline)
                 
-                Text("Desired amount of sleep")
-                    .font(.headline)
-                Stepper("\(sleepAmount.formatted())", value: $sleepAmount)
+                VStack(alignment: .leading, spacing: 0) {
+                    Text("Desired amount of sleep")
+                        .font(.headline)
+                    Stepper("\(sleepAmount.formatted())", value: $sleepAmount)
+                }
                 
-                DatePicker("Please enter a time",
-                           selection: $wakeUp,
-                           displayedComponents: .hourAndMinute)
-                .labelsHidden()
+                Section("What time would you like to wake up?") {
+                    DatePicker("Please enter a time to wake up",
+                               selection: $wakeUp,
+                               displayedComponents: .hourAndMinute)
+                    .labelsHidden()
+                }
                 
-                Text("Daily coffee intake")
-                    .font(.headline)
-                Stepper(coffeeAmount == 1 ? "1 Cup" : "\(coffeeAmount) Cups", value: $coffeeAmount)
+                Section {
+                    Stepper(coffeeAmount == 1 ? "1 Cup" : "\(coffeeAmount) Cups", value: $coffeeAmount)
+                } header: {
+                    Text("Daily coffee intake")
+                        .font(.headline)
+                }
             }
             .navigationTitle("BetterRest")
             .toolbar {
@@ -48,6 +55,13 @@ struct ContentView: View {
             }
         }
         
+    }
+    
+    static var defaultWakeTime:Date {
+        var components = DateComponents()
+        components.hour = 7
+        components.minute = 0
+        return Calendar.current.date(from: components) ?? Date.now
     }
     
     func calculateBedtime() {
