@@ -12,6 +12,8 @@ struct ContentView: View {
     @State private var rootWord = ""
     @State private var newWord = ""
     
+    @State private var playerScore = 0
+    
     @State private var spelledRight = true
     
     @State private var errorTitle = ""
@@ -25,6 +27,10 @@ struct ContentView: View {
                     TextField("Enter your word", text: $newWord)
                         .textInputAutocapitalization(.never)
                         .onSubmit(addNewWord)
+                }
+                
+                Section ("Words Found") {
+                    Text("\(usedWords.count)")
                 }
                 
                 Section {
@@ -55,6 +61,7 @@ struct ContentView: View {
     func startGame() {
         
         usedWords.removeAll()
+        playerScore = 0
         
         guard let startWordsURL = Bundle.main.url(forResource: "start", withExtension: "txt"),
               let startWords = try? String(contentsOf: startWordsURL) else {
