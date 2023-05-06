@@ -37,6 +37,11 @@ struct ContentView: View {
                 }
             }
             .navigationTitle(rootWord)
+            .toolbar {
+                Button("Start Over") {
+                    startGame()
+                }
+            }
         }
         .onAppear(perform: startGame)
         .alert(errorTitle,
@@ -48,29 +53,34 @@ struct ContentView: View {
     }
     
     func startGame() {
-        // 1. Find the URL for start.txt in our app bundle
-        if let startWordsURL = Bundle.main.url(forResource: "start", withExtension: "txt") {
-            // 2. Load start.txt into a string
-            if let startWords = try? String(contentsOf: startWordsURL) {
-                // 3. Split the string up into an array of strings, splitting on line breaks
-                let allWords = startWords.components(separatedBy: "\n")
-                
-                // 4. Pick one random word, or use "silkworm" as a sensible default
-                rootWord = allWords.randomElement() ?? "silkworm"
-                
-                // If we are here everything has worked, so we can exit
-                return
-            }
+        
+        usedWords.removeAll()
+        
+        guard let startWordsURL = Bundle.main.url(forResource: "start", withExtension: "txt"),
+              let startWords = try? String(contentsOf: startWordsURL) else {
+            
+            fatalError("Could not load start.txt from bundle.")
         }
         
-        // If were are *here* then there was a problem – trigger a crash and report the error
-        fatalError("Could not load start.txt from bundle.")
+        let allWords = startWords.components(separatedBy: "\n")
+        rootWord = allWords.randomElement() ?? "silkworm"
+        
     }
     
     func addNewWord () {
         let answer = newWord.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
-        print ("alsdkjf")
+        
         guard !answer.isEmpty else {
+            return
+        }
+        
+        guard tooShort(word: answer) else {
+            wordError(title: "Word is too short", message: "Think big")
+            return
+        }
+        
+        guard notRoot(word: answer) else {
+            wordError(title: "That doesn't count", message: "Boring")
             return
         }
         
@@ -93,6 +103,14 @@ struct ContentView: View {
             usedWords.insert(answer, at: 0)
         }
         newWord = ""
+    }
+    
+    func tooShort (word:String) -> Bool {
+        word.count > 2
+    }
+    
+    func notRoot (word:String) -> Bool {
+        word != rootWord
     }
     
     func isOriginal (word:String) -> Bool {
