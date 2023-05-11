@@ -12,11 +12,27 @@ struct ContentView: View {
     @State private var animationAmount = 1.0
     @State private var enabled = false
     
+    @State private var dragAmount = CGSize.zero
+    
     var body: some View {
         
         print ("animationAmount: \(animationAmount)")
         
         return VStack {
+            LinearGradient(gradient: Gradient(colors: [.yellow, .red]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                .frame(width: 300, height: 200)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .offset(dragAmount)
+                .gesture(DragGesture()
+                    .onChanged({ change in
+                        dragAmount = change.translation
+                    })
+                        .onEnded({ _ in
+                            withAnimation(.spring()) {
+                                dragAmount = .zero
+                            }
+                        }))
+            
             Stepper("Scale amount",
                      value: $animationAmount.animation(
                         .easeInOut(duration: 1).repeatCount(3, autoreverses: true)),
