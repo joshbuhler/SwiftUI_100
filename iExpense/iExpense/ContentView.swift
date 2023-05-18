@@ -12,6 +12,11 @@ class User:ObservableObject {
     @Published var lastName = "Baggins"
 }
 
+struct CodableUser:Codable {
+    var firstName = "Bilbo"
+    var lastName = "Baggins"
+}
+
 struct ContentView: View {
     
     @StateObject var user = User()
@@ -20,6 +25,8 @@ struct ContentView: View {
     
     @State private var numbers = [Int]()
     @AppStorage("tapCount") private var currentNumber = 0
+    
+    @State private var cUser = CodableUser(firstName: "Taylor", lastName: "Swift")
     
     var body: some View {
         
@@ -47,6 +54,14 @@ struct ContentView: View {
                 Button ("Add Number") {
                     numbers.append(currentNumber)
                     currentNumber += 1
+                }
+                Spacer()
+                Button("Save User") {
+                    let encoder = JSONEncoder()
+
+                    if let data = try? encoder.encode(cUser) {
+                        UserDefaults.standard.set(data, forKey: "UserData")
+                    }
                 }
             }
             .toolbar {
