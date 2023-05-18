@@ -19,7 +19,7 @@ struct ContentView: View {
     @State private var showingSheet = false
     
     @State private var numbers = [Int]()
-    @State private var currentNumber = 1
+    @AppStorage("tapCount") private var currentNumber = 0
     
     var body: some View {
         
