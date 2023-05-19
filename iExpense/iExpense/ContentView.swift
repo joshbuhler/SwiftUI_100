@@ -7,89 +7,45 @@
 
 import SwiftUI
 
-class User:ObservableObject {
-    @Published var firstName = "Bilbo"
-    @Published var lastName = "Baggins"
+struct ExpenseItem {
+    let name: String
+    let type: String
+    let amount: Double
 }
 
-struct CodableUser:Codable {
-    var firstName = "Bilbo"
-    var lastName = "Baggins"
+class Expenses: ObservableObject {
+    @Published var items = [ExpenseItem]()
 }
+
 
 struct ContentView: View {
     
-    @StateObject var user = User()
-    
-    @State private var showingSheet = false
-    
-    @State private var numbers = [Int]()
-    @AppStorage("tapCount") private var currentNumber = 0
-    
-    @State private var cUser = CodableUser(firstName: "Taylor", lastName: "Swift")
+    @StateObject var expenses = Expenses()
     
     var body: some View {
-        
         NavigationView {
-            VStack {
-                Text("Your name is: \(user.firstName) \(user.lastName)")
-                
-                TextField("First Name", text: $user.firstName)
-                TextField("Last Name", text: $user.lastName)
-                
-                Button("Show Sheet") {
-                    showingSheet.toggle()
+            List {
+                ForEach(expenses.items, id: \.name) { item in
+                    Text(item.name)
                 }
-                .sheet(isPresented: $showingSheet) {
-                    SecondView(name: user.firstName)
-                }
-                
-                List {
-                    ForEach(numbers, id: \.self) {
-                        Text("Row: \($0)")
-                    }
-                    .onDelete(perform: removeRows)
-                }
-                
-                Button ("Add Number") {
-                    numbers.append(currentNumber)
-                    currentNumber += 1
-                }
-                Spacer()
-                Button("Save User") {
-                    let encoder = JSONEncoder()
-
-                    if let data = try? encoder.encode(cUser) {
-                        UserDefaults.standard.set(data, forKey: "UserData")
-                    }
-                }
+                .onDelete(perform: removeItems)
             }
+            .navigationTitle("iExpense")
             .toolbar {
-                EditButton()
+                Button {
+                    let expense = ExpenseItem(name: "Test",
+                                              type: "Personal",
+                                              amount: 3)
+                    expenses.items.append(expense)
+                } label: {
+                    Image(systemName: "plus")
+                }
             }
         }
-        .padding()
-        
     }
     
-    func removeRows(at offsets:IndexSet) {
-        numbers.remove(atOffsets: offsets)
-    }
-}
-
-struct SecondView: View {
-    
-    @Environment(\.dismiss) var dismiss
-    
-    let name:String
-    
-    var body: some View {
-        VStack {
-            Text("Hello \(name)")
-            Button ("Dismiss") {
-                dismiss()
-            }
-        }
+    func removeItems(at offsets:IndexSet) {
+        expenses.items.remove(atOffsets: offsets)
     }
 }
 
