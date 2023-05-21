@@ -56,6 +56,14 @@ struct ExpenseRow: View {
     
     var body: some View {
         HStack {
+            switch (item.type) {
+            case .business:
+                Image(systemName:"briefcase")
+            case .personal:
+                Image(systemName:"figure.wave")
+            }
+                
+            Spacer()
             VStack(alignment: .leading) {
                 Text(item.name)
                     .font(.headline)
