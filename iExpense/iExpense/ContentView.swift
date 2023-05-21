@@ -10,8 +10,22 @@ import SwiftUI
 struct ExpenseItem:Identifiable, Codable {
     var id = UUID()
     let name: String
-    let type: String
+    let type: ExpenseType
     let amount: Double
+}
+
+enum ExpenseType:String, Codable, CaseIterable {
+    case business
+    case personal
+    
+    func toString () -> String {
+        switch self {
+        case .business:
+            return "Business"
+        case .personal:
+            return "Personal"
+        }
+    }
 }
 
 class Expenses: ObservableObject {
@@ -45,7 +59,7 @@ struct ExpenseRow: View {
             VStack(alignment: .leading) {
                 Text(item.name)
                     .font(.headline)
-                Text(item.type)
+                Text(item.type.toString())
             }
             Spacer()
             Text(item.amount, format: .currency(code: "USD"))
