@@ -7,15 +7,50 @@
 
 import SwiftUI
 
-struct ExpenseItem:Identifiable {
-    let id = UUID()
+struct ExpenseItem:Identifiable, Codable {
+    var id = UUID()
     let name: String
     let type: String
     let amount: Double
 }
 
 class Expenses: ObservableObject {
-    @Published var items = [ExpenseItem]()
+    
+    init() {
+        if let savedItems = UserDefaults.standard.data(forKey: "Items"),
+           let decodedItems = try? JSONDecoder().decode([ExpenseItem].self,
+                                                        from: savedItems) {
+            items = decodedItems
+            return
+        }
+        
+        items = []
+    }
+    
+    @Published var items = [ExpenseItem]() {
+        didSet {
+            if let encoded = try? JSONEncoder().encode(items) {
+                UserDefaults.standard.set(encoded, forKey: "Items")
+            }
+        }
+    }
+}
+
+struct ExpenseRow: View {
+    
+    let item:ExpenseItem
+    
+    var body: some View {
+        HStack {
+            VStack(alignment: .leading) {
+                Text(item.name)
+                    .font(.headline)
+                Text(item.type)
+            }
+            Spacer()
+            Text(item.amount, format: .currency(code: "USD"))
+        }
+    }
 }
 
 
@@ -23,25 +58,27 @@ struct ContentView: View {
     
     @StateObject var expenses = Expenses()
     
+    @State private var showingAddExpense = false
+    
     var body: some View {
         NavigationView {
             List {
                 ForEach(expenses.items) { item in
-                    Text(item.name)
+                    ExpenseRow(item: item)
                 }
                 .onDelete(perform: removeItems)
             }
             .navigationTitle("iExpense")
             .toolbar {
                 Button {
-                    let expense = ExpenseItem(name: "Test",
-                                              type: "Personal",
-                                              amount: 3)
-                    expenses.items.append(expense)
+                    showingAddExpense = true
                 } label: {
                     Image(systemName: "plus")
                 }
             }
+        }
+        .sheet(isPresented: $showingAddExpense) {
+            AddView(expenses: expenses)
         }
     }
     
