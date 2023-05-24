@@ -7,6 +7,16 @@
 
 import SwiftUI
 
+struct User: Codable {
+    let name: String
+    let address: Address
+}
+
+struct Address: Codable {
+    let street: String
+    let city: String
+}
+
 struct ContentView: View {
     
     
@@ -30,17 +40,37 @@ struct ContentView: View {
 //            .frame(maxWidth: .infinity)
 //        }
         
-        NavigationView {
-            
-            List(0..<100) { row in
-                NavigationLink {
-                    Text("Detail View")
-                } label: {
-                    Text("Hello world")
-                        .padding()
+//        NavigationView {
+//
+//            List(0..<100) { row in
+//                NavigationLink {
+//                    Text("Detail View")
+//                } label: {
+//                    Text("Hello world")
+//                        .padding()
+//                }
+//            }
+//            .navigationTitle("SwiftUI")
+//        }
+        
+        Button("Decode JSON") {
+            let input = """
+            {
+                "name": "Taylor Swift",
+                "address": {
+                    "street": "555, Taylor Swift Avenue",
+                    "city": "Nashville"
                 }
             }
-            .navigationTitle("SwiftUI")
+            """
+            
+            let data = Data(input.utf8)
+            let decoder = JSONDecoder()
+            if let user = try? decoder.decode(User.self, from: data) {
+                print (user.address.street)
+            }
+
+            // more code to come
         }
     }
 }
