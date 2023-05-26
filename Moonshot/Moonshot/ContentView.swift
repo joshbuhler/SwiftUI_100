@@ -19,70 +19,11 @@ struct Address: Codable {
 
 struct ContentView: View {
     
-    let layout = [
-        GridItem(.adaptive(minimum:80, maximum: 120))
-    ]
+    let astronauts:[String: Astronaut] = Bundle.main.decode("astronauts.json")
+    let missions:[Mission] = Bundle.main.decode("missions.json")
     
     var body: some View {
-        
-//        GeometryReader { geo in
-//            Image("bronco_01")
-//                .resizable()
-//                .scaledToFit()
-//                .frame(width: geo.size.width * 0.8)
-//                .frame(width: geo.size.width, height: geo.size.height)
-//        }
-        
-//        ScrollView(.horizontal) {
-//            LazyHStack(spacing: 10) {
-//                ForEach(0..<100) {
-//                    CustomText("Item: \($0)")
-//                        .font(.title)
-//                }
-//            }
-//            .frame(maxWidth: .infinity)
-//        }
-        
-//        NavigationView {
-//
-//            List(0..<100) { row in
-//                NavigationLink {
-//                    Text("Detail View")
-//                } label: {
-//                    Text("Hello world")
-//                        .padding()
-//                }
-//            }
-//            .navigationTitle("SwiftUI")
-//        }
-        
-//        Button("Decode JSON") {
-//            let input = """
-//            {
-//                "name": "Taylor Swift",
-//                "address": {
-//                    "street": "555, Taylor Swift Avenue",
-//                    "city": "Nashville"
-//                }
-//            }
-//            """
-//
-//            let data = Data(input.utf8)
-//            let decoder = JSONDecoder()
-//            if let user = try? decoder.decode(User.self, from: data) {
-//                print (user.address.street)
-//            }
-//
-//            // more code to come
-//        }
-        
-        ScrollView(.horizontal) {
-            LazyHGrid(rows: layout) {
-                ForEach (0..<1000) {
-                    Text("Item \($0)")
-                }
-            }
-        }
+        Text("\(astronauts.count)")
     }
 }
 
