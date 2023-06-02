@@ -12,6 +12,8 @@ struct ContentView: View {
     @State private var petalOffset = -20.0
     @State private var petalWidth = 100.0
     
+    @State private var colorCycle = 0.0
+    
     var body: some View {
         VStack {
             //            Path { path in
@@ -37,29 +39,71 @@ struct ContentView: View {
 //            Circle()
 //            //                .stroke(.blue, lineWidth: 40)
 //                .strokeBorder(.blue, lineWidth: 40)
-            Capsule()
-                .strokeBorder(ImagePaint(image: Image(systemName: "globe"), scale: 1.0), lineWidth: 20)
-                .frame(width: 300, height: 200)
+//            Capsule()
+//                .strokeBorder(ImagePaint(image: Image(systemName: "globe"), scale: 1.0), lineWidth: 20)
+//                .frame(width: 300, height: 200)
+//
+//            Text("Hello World")
+//                .frame(width: 300, height: 300)
+////                .background(.red)
+//                .border(ImagePaint(image: Image(systemName: "globe"), scale: 1), width: 30)
+//
+//            Flower(petalOffset: petalOffset, petalWidth: petalWidth)
+////                .stroke(.red, lineWidth: 1)
+//                .fill(.red, style: FillStyle(eoFill: true))
+//
+//            Text("Offset")
+//            Slider(value: $petalOffset, in: -40...40)
+//                .padding([.horizontal, .bottom])
+//
+//            Text("Width")
+//            Slider(value: $petalWidth, in: 0...100)
+//                .padding(.horizontal)
             
-            Text("Hello World")
-                .frame(width: 300, height: 300)
-//                .background(.red)
-                .border(ImagePaint(image: Image(systemName: "globe"), scale: 1), width: 30)
             
-            Flower(petalOffset: petalOffset, petalWidth: petalWidth)
-//                .stroke(.red, lineWidth: 1)
-                .fill(.red, style: FillStyle(eoFill: true))
-            
-            Text("Offset")
-            Slider(value: $petalOffset, in: -40...40)
-                .padding([.horizontal, .bottom])
-            
-            Text("Width")
-            Slider(value: $petalWidth, in: 0...100)
-                .padding(.horizontal)
-            
+//            ColorCyclingCircle(amount: colorCycle)
+//                            .frame(width: 300, height: 300)
+//
+//                        Slider(value: $colorCycle)
         }
         .padding()
+    }
+}
+
+struct ColorCyclingCircle: View {
+    var amount = 0.0
+    var steps = 100
+
+    var body: some View {
+        ZStack {
+            ForEach(0..<steps) { value in
+                Circle()
+                    .inset(by: Double(value))
+//                    .strokeBorder(color(for: value, brightness: 1), lineWidth: 2)
+                    .strokeBorder(
+                        LinearGradient(
+                            gradient: Gradient(colors: [
+                                color(for: value, brightness: 1),
+                                color(for: value, brightness: 0.5)
+                            ]),
+                            startPoint: .top,
+                            endPoint: .bottom
+                        ),
+                        lineWidth: 2
+                    )
+            }
+        }
+        .drawingGroup()
+    }
+
+    func color(for value: Int, brightness: Double) -> Color {
+        var targetHue = Double(value) / Double(steps) + amount
+
+        if targetHue > 1 {
+            targetHue -= 1
+        }
+
+        return Color(hue: targetHue, saturation: 1, brightness: brightness)
     }
 }
 
