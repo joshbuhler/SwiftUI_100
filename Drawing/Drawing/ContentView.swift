@@ -15,7 +15,7 @@ struct ContentView: View {
     @State private var colorCycle = 0.0
     
     var body: some View {
-        VStack {
+//        VStack {
             //            Path { path in
             //                path.move(to: CGPoint(x: 200, y: 100))
             //                path.addLine(to: CGPoint(x: 100, y: 300))
@@ -65,8 +65,20 @@ struct ContentView: View {
 //                            .frame(width: 300, height: 300)
 //
 //                        Slider(value: $colorCycle)
-        }
-        .padding()
+//        }
+//        .padding()
+        
+//        ZStack {
+            Image("CaptainGoose")
+            .colorInvert()
+            .colorMultiply(.green)
+            
+//            Rectangle()
+//                .fill(.red)
+//                .blendMode(.multiply)
+//        }
+//        .frame(width: 200, height: 200)
+//        .clipped()
     }
 }
 
