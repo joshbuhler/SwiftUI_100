@@ -9,77 +9,44 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var petalOffset = -20.0
-    @State private var petalWidth = 100.0
-    
-    @State private var colorCycle = 0.0
-    
-    var body: some View {
-//        VStack {
-            //            Path { path in
-            //                path.move(to: CGPoint(x: 200, y: 100))
-            //                path.addLine(to: CGPoint(x: 100, y: 300))
-            //                path.addLine(to: CGPoint(x: 300, y: 300))
-            //                path.addLine(to: CGPoint(x: 200, y: 100))
-            //            }
-            //            .stroke(.green, style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
-            //
-            //            HStack {
-            //                Triangle()
-            //                Triangle()
-            //                    .fill(.red)
-            //                Triangle()
-            //                    .frame(width: 300, height: 300)
-            //            }
-            //
-//            Arc(startAngle: .degrees(0), endAngle: .degrees(45), clockwise: true)
-//                .stroke(.blue, lineWidth: 10)
-//                .frame(width: 300, height: 300)
-//
-//            Circle()
-//            //                .stroke(.blue, lineWidth: 40)
-//                .strokeBorder(.blue, lineWidth: 40)
-//            Capsule()
-//                .strokeBorder(ImagePaint(image: Image(systemName: "globe"), scale: 1.0), lineWidth: 20)
-//                .frame(width: 300, height: 200)
-//
-//            Text("Hello World")
-//                .frame(width: 300, height: 300)
-////                .background(.red)
-//                .border(ImagePaint(image: Image(systemName: "globe"), scale: 1), width: 30)
-//
-//            Flower(petalOffset: petalOffset, petalWidth: petalWidth)
-////                .stroke(.red, lineWidth: 1)
-//                .fill(.red, style: FillStyle(eoFill: true))
-//
-//            Text("Offset")
-//            Slider(value: $petalOffset, in: -40...40)
-//                .padding([.horizontal, .bottom])
-//
-//            Text("Width")
-//            Slider(value: $petalWidth, in: 0...100)
-//                .padding(.horizontal)
-            
-            
-//            ColorCyclingCircle(amount: colorCycle)
-//                            .frame(width: 300, height: 300)
-//
-//                        Slider(value: $colorCycle)
-//        }
-//        .padding()
-        
-//        ZStack {
-            Image("CaptainGoose")
-            .colorInvert()
-            .colorMultiply(.green)
-            
-//            Rectangle()
-//                .fill(.red)
-//                .blendMode(.multiply)
-//        }
-//        .frame(width: 200, height: 200)
-//        .clipped()
-    }
+    @State private var amount = 0.0
+
+        var body: some View {
+            VStack {
+                ZStack {
+                    Circle()
+                        .fill(.red)
+                        .frame(width: 200 * amount)
+                        .offset(x: -50, y: -80)
+                        .blendMode(.screen)
+
+                    Circle()
+                        .fill(.green)
+                        .frame(width: 200 * amount)
+                        .offset(x: 50, y: -80)
+                        .blendMode(.screen)
+
+                    Circle()
+                        .fill(.blue)
+                        .frame(width: 200 * amount)
+                        .blendMode(.screen)
+                }
+                .frame(width: 300, height: 300)
+
+                Slider(value: $amount)
+                    .padding()
+                
+                Image("CaptainGoose")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 200, height: 200)
+                    .saturation(amount)
+                    .blur(radius: (1 - amount) * 20)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(.black)
+            .ignoresSafeArea()
+        }
 }
 
 struct ColorCyclingCircle: View {
