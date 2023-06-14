@@ -13,6 +13,7 @@ struct CheckoutView: View {
     
     @State private var confirmationMessage = ""
     @State private var showingConfirmation = false
+    @State private var showingError = false
     
     var body: some View {
         ScrollView {
@@ -40,6 +41,13 @@ struct CheckoutView: View {
         }
         .navigationTitle("Check out")
         .navigationBarTitleDisplayMode(.inline)
+        .alert("⚠️ Error Placing Order", isPresented: $showingError) {
+            Button("OK") { }
+        } message: {
+            VStack {
+                Text("No cupcake for you!")
+            }
+        }
         .alert("Thank you!", isPresented: $showingConfirmation) {
             Button("OK") { }
         } message: {
@@ -58,7 +66,7 @@ struct CheckoutView: View {
         var request = URLRequest(url: url)
         request.setValue("application/json",
                          forHTTPHeaderField: "Content-Type")
-        request.httpMethod = "POST"
+//        request.httpMethod = "POST"
         
         do {
             let (data, _) = try await URLSession.shared.upload(for: request, from: encoded)
@@ -67,7 +75,7 @@ struct CheckoutView: View {
             confirmationMessage = "Your order for \(decodedOrder.quantity)x \(Order.types[decodedOrder.type].lowercased()) cupcakes is on its way!"
             showingConfirmation = true
         } catch {
-            print("Checkout failed.")
+            showingError = true
         }
     }
 }
