@@ -14,6 +14,7 @@
 		033A0A1E2A2F7B77000681AC /* CupcakeCornerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033A0A1D2A2F7B77000681AC /* CupcakeCornerTests.swift */; };
 		033A0A282A2F7B77000681AC /* CupcakeCornerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033A0A272A2F7B77000681AC /* CupcakeCornerUITests.swift */; };
 		033A0A2A2A2F7B77000681AC /* CupcakeCornerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033A0A292A2F7B77000681AC /* CupcakeCornerUITestsLaunchTests.swift */; };
+		03C02EA42A3A0E160094290E /* AddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C02EA32A3A0E160094290E /* AddressView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		033A0A232A2F7B77000681AC /* CupcakeCornerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CupcakeCornerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		033A0A272A2F7B77000681AC /* CupcakeCornerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CupcakeCornerUITests.swift; sourceTree = "<group>"; };
 		033A0A292A2F7B77000681AC /* CupcakeCornerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CupcakeCornerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		03C02EA32A3A0E160094290E /* AddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 			children = (
 				033A0A0C2A2F7B75000681AC /* CupcakeCornerApp.swift */,
 				033A0A0E2A2F7B75000681AC /* ContentView.swift */,
+				03C02EA32A3A0E160094290E /* AddressView.swift */,
 				033A0A102A2F7B77000681AC /* Assets.xcassets */,
 				033A0A122A2F7B77000681AC /* Preview Content */,
 			);
@@ -259,6 +262,7 @@
 			files = (
 				033A0A0F2A2F7B75000681AC /* ContentView.swift in Sources */,
 				033A0A0D2A2F7B75000681AC /* CupcakeCornerApp.swift in Sources */,
+				03C02EA42A3A0E160094290E /* AddressView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

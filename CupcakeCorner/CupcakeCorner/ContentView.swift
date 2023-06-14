@@ -9,80 +9,62 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var results = [Result]()
+    @StateObject var order = Order()
     
     var body: some View {
-        List(results, id: \.trackId) { item in
-            VStack(alignment: .leading) {
-                AsyncImage(url: URL(string: "https://hws.dev/img/logo.png")) { phase in
-//                AsyncImage(url: URL(string: "https://hws.dev/img/bad.png")) { phase in
-                    if let image = phase.image {
-                        image
-                            .resizable()
-                            .scaledToFit()
-                    } else if phase.error != nil {
-                        Text("There was an error loading the image.")
-                    } else {
-                        ProgressView()
+        NavigationView {
+            Form {
+                Section {
+                    Picker("Select your cake type", selection: $order.type) {
+                        ForEach(Order.types.indices) {
+                            Text(Order.types[$0])
+                        }
+                    }
+                    
+                    Stepper("Number of cakes: \(order.quantity)",
+                            value: $order.quantity)
+                }
+                
+                Section {
+                    Toggle("Any special requests?",
+                           isOn: $order.specialRequestEnabled.animation())
+                    
+                    if (order.specialRequestEnabled) {
+                        Toggle("Extra frosting", isOn: $order.extraFrosting)
+                        Toggle("Add Sprinkles", isOn: $order.addSprinkles)
                     }
                 }
-                .frame(width: 200, height: 200)
                 
-                Text(item.trackName)
-                    .font(.headline)
-                Text(item.collectionName)
+                Section {
+                    NavigationLink {
+                        AddressView(order: order)
+                    } label: {
+                        Text("Delivery Details")
+                    }
+
+                }
             }
-        }
-        .task {
-            await loadData()
+            .navigationTitle("Cupcake Corner")
         }
     }
-    
-    func loadData() async {
-        guard let url = URL(string: "https://itunes.apple.com/search?term=taylor+swift&entity=song") else {
-            print("Invalid URL")
-            return
-        }
-        
-        do {
-            let (data, _) = try await URLSession.shared.data(from: url)
+}
 
-            if let decodedResponse = try? JSONDecoder().decode(Response.self, from: data) {
-                results = decodedResponse.results
+class Order: ObservableObject {
+    static let types = ["Vanilla", "Strawberry", "Chocolate", "Rainbow"]
+
+    @Published var type = 0
+    @Published var quantity = 3
+
+    @Published var specialRequestEnabled = false {
+        didSet {
+                if specialRequestEnabled == false {
+                    extraFrosting = false
+                    addSprinkles = false
+                }
             }
-        } catch {
-            print("Invalid data")
-        }
     }
-}
-
-class User:ObservableObject, Codable {
-    
-    enum CodingKeys:CodingKey {
-        case name
-    }
-    
-    @Published var name = "Homer Simpson"
-    
-    required init(from decoder:Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        name = try container.decode(String.self, forKey: .name)
-    }
-    
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(name, forKey: .name)
-    }
-}
-
-struct Response: Codable {
-    var results: [Result]
-}
-
-struct Result: Codable {
-    var trackId: Int
-    var trackName: String
-    var collectionName: String
+    @Published var extraFrosting = false
+    @Published var addSprinkles = false
 }
 
 
