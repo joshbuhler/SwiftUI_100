@@ -16,6 +16,7 @@
 		033A0A2A2A2F7B77000681AC /* CupcakeCornerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033A0A292A2F7B77000681AC /* CupcakeCornerUITestsLaunchTests.swift */; };
 		03C02EA42A3A0E160094290E /* AddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C02EA32A3A0E160094290E /* AddressView.swift */; };
 		03C02EA62A3A0ECA0094290E /* CheckoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C02EA52A3A0ECA0094290E /* CheckoutView.swift */; };
+		03C02EA82A3A12340094290E /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C02EA72A3A12340094290E /* Order.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		033A0A292A2F7B77000681AC /* CupcakeCornerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CupcakeCornerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		03C02EA32A3A0E160094290E /* AddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressView.swift; sourceTree = "<group>"; };
 		03C02EA52A3A0ECA0094290E /* CheckoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutView.swift; sourceTree = "<group>"; };
+		03C02EA72A3A12340094290E /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 				033A0A0C2A2F7B75000681AC /* CupcakeCornerApp.swift */,
 				033A0A0E2A2F7B75000681AC /* ContentView.swift */,
 				03C02EA32A3A0E160094290E /* AddressView.swift */,
+				03C02EA72A3A12340094290E /* Order.swift */,
 				03C02EA52A3A0ECA0094290E /* CheckoutView.swift */,
 				033A0A102A2F7B77000681AC /* Assets.xcassets */,
 				033A0A122A2F7B77000681AC /* Preview Content */,
@@ -265,6 +268,7 @@
 			files = (
 				033A0A0F2A2F7B75000681AC /* ContentView.swift in Sources */,
 				033A0A0D2A2F7B75000681AC /* CupcakeCornerApp.swift in Sources */,
+				03C02EA82A3A12340094290E /* Order.swift in Sources */,
 				03C02EA62A3A0ECA0094290E /* CheckoutView.swift in Sources */,
 				03C02EA42A3A0E160094290E /* AddressView.swift in Sources */,
 			);
